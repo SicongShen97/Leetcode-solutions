@@ -23,3 +23,24 @@ public:
     }
 };
 
+/*
+动态规划：完全背包(排列)
+1.确定dp及含义：dp[i]表示刚好爬完i步楼梯排列数
+2.递推公式：dp[i] += dp[i - nums[j]]
+3.初始化：dp[0] = 1, 其余为0
+4.遍历顺序：完全背包：容量从小到大，排列：先容量再步数
+*/
+
+class Solution {
+public:
+    int climbStairs(int n) {
+        vector<int> dp(n + 1, 0);
+        dp[0] = 1;
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= 2; j++) {
+                if (i >= j) dp[i] += dp[i - j];
+            }
+        }
+        return dp[n];
+    }
+};

@@ -17,3 +17,20 @@ class Solution:
             dp[0] = dp[1]
             dp[1] = sum
         return dp[1]
+
+"""
+动态规划：完全背包(排列)
+1.确定dp及含义：dp[i]表示刚好爬完i步楼梯排列数
+2.递推公式：dp[i] += dp[i-nums[j]]
+3.初始化：dp[0] = 1, 其余为0
+4.遍历顺序：完全背包：容量从小到大，排列：先容量再步数
+"""
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        dp = [0]*(n+1)
+        dp[0] = 1
+        for i in range(1,n+1):
+            for j in [1,2]:
+                if (i>=j):
+                    dp[i] += dp[i-j]
+        return dp[n]
