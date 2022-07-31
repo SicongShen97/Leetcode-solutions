@@ -16,3 +16,17 @@ class Solution:
             dp[i] = max(nums[i], dp[i-1] + nums[i])
             res = max(res, dp[i])
         return res
+
+'''
+贪心：当前连续和为负时，立刻放弃，从下一个元素开始计算连续和
+'''
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        res = -float('inf')
+        sum = 0
+        for i in range(len(nums)):
+            sum += nums[i]
+            res = max(res, sum)
+            if sum < 0:
+                sum = 0
+        return res

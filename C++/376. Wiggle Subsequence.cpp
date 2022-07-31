@@ -21,7 +21,7 @@ public:
                 if (nums[i] > nums[j]) dp[i][1] = max(dp[i][1], dp[j][0] + 1);
                 if (nums[i] < nums[j]) dp[i][0] = max(dp[i][0], dp[j][1] + 1);
             }
-            res = max(dp[i][0], dp[i][1]);
+            res = max({res, dp[i][0], dp[i][1] });
         }
         return res;
     }
