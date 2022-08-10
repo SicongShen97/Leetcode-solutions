@@ -1,6 +1,6 @@
 /*
 1.µÝ¹é
-2.µü´ú
+2.²ãÐò±éÀú
 */
 /**
  * Definition for a binary tree node.
@@ -15,30 +15,31 @@
  */
  // class Solution {
  // public:
- //     int maxDepth(TreeNode* root) {
- //         if (!root) return 0;
- //         int lheight = maxDepth(root->left);
- //         int rheight = maxDepth(root->right);
- //         return 1 + max(lheight, rheight);
+ //     TreeNode* invertTree(TreeNode* root) {
+ //         if (root == NULL) return root;
+ //         swap(root->left, root->right);
+ //         invertTree(root->left);
+ //         invertTree(root->right);
+ //         return root;
  //     }
  // };
 
 class Solution {
 public:
-    int maxDepth(TreeNode* root) {
-        int depth = 0;
-        if (root == NULL) return depth;
+    TreeNode* invertTree(TreeNode* root) {
+        if (root == NULL) return root;
         queue<TreeNode*> que;
         que.push(root);
         while (!que.empty()) {
-            depth++;
             int size = que.size();
             for (int i = 0; i < size; i++) {
-                TreeNode* cur = que.front(); que.pop();
+                TreeNode* cur = que.front();
+                que.pop();
+                swap(cur->left, cur->right);
                 if (cur->left) que.push(cur->left);
                 if (cur->right) que.push(cur->right);
             }
         }
-        return depth;
+        return root;
     }
 };
